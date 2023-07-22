@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gsap</title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <h1 class="anim1"><span>Hello, I am Yahya</span><span>this is my first time using Gsap</span> <span>on website</span></h1>
+            <p class="anim1">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Esse aut aperiam nemo </p>
+            <button class="btn anim1">start</button>
+            <button class="Sbtn">hola</button>
+        </div>
+        <div class="imgBx">
+            <img src="img/mrO.jpg" alt="">
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.0/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.0/CSSRulePlugin.min.js"></script>
+
+    <script>
+        var rule = CSSRulePlugin.getRule('span:after')
+        /*
+        gsap.from('.anim1', {opacity: 0, duration: 1, y: -100, stagger:1,})
+        gsap.to(rule,{cssRule: {scaleY: 0}, duration:1,})
+        */
+        var tl = gsap.timeline({defaults:{duration:1}})
+        tl.from(".anim1", {y:-50, stagger:.6, opacity:0})
+            .to(rule, {duration:1.8, cssRule:{scaleY:0}}, "-=2.1")
+            .from ('img', {duration:1.5, y:100, opacity:0},"-=.7")
+            .from('.avtive', {duration:1, y:100,opacity:0})
+
+        document.querySelector('.btn').addEventListener('click', () =>{
+            tl.reversed() ? tl.play() : tl.reverse(); setTimeout(function(){document.querySelector('.Sbtn').classList.add('avtive')}, 3000) ;
+        })
+    </script>
+</body>
+</html>
